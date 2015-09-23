@@ -4,13 +4,10 @@ default: container
 
 
 build:
-	docker run \
-			--rm \
-			-v $(CURDIR):/usr/code \
-			-e GOPATH=/usr/code/.gobuild:/usr/code/.gobuild/src/$(PROJECT_NAMESPACE)/$(PROJECT)/Godeps/_workspace \
-			-w /usr/code \
-			golang:1.5 \
-			go build -a -ldflags "-X main.version=$(VERSION)" -o $(BIN)
+	docker run -v $(CURDIR):/src \
+	-e LDFLAGS='-X main.version $(VERSION)' \
+	centurylink/golang-builder:latest
 
 container: build
 	docker build -t registry.luzifer.io/ipfsmd .
+	docker push registry.luzifer.io/ipfsmd
