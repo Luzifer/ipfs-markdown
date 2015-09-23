@@ -14,6 +14,7 @@ import (
 
 type config struct {
 	IPFSGateway string `flag:"gateway" default:"http://gateway.ipfs.io" description:"Gateway to fetch markdown from"`
+	Branding    string `flag:"branding" default:"IPFS-Markdown-Viewer" description:"Branding to show on page"`
 	Listen      string `flag:"listen" default:":3000" description:"IP/Port to listen on"`
 }
 
@@ -40,6 +41,7 @@ func handleViewer(res http.ResponseWriter, r *http.Request) {
 	tpl := pongo2.Must(pongo2.FromString(string(tplData)))
 	tpl.ExecuteWriter(pongo2.Context{
 		"ipfs_hash": vars["ipfs_hash"],
+		"branding":  cfg.Branding,
 	}, res)
 }
 
