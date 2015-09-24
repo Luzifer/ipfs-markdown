@@ -13,7 +13,7 @@ import (
 //go:generate go-bindata -o bindata.go viewer.html
 
 type config struct {
-	IPFSGateway string `flag:"gateway" default:"http://gateway.ipfs.io" description:"Gateway to fetch markdown from"`
+	IPFSGateway string `flag:"gateway" default:"https://ipfs.io" description:"Gateway to fetch markdown from"`
 	Branding    string `flag:"branding" default:"IPFS-Markdown-Viewer" description:"Branding to show on page"`
 	Listen      string `flag:"listen" default:":3000" description:"IP/Port to listen on"`
 }
